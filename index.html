@@ -103,6 +103,101 @@
             }
         }
 
+        /* NUEVO: Perrito animado bailando en el fondo */
+        .dancing-dog {
+            position: absolute;
+            font-size: 80px;
+            z-index: 1;
+            animation: dogDance 2s infinite ease-in-out;
+        }
+
+        .dancing-dog.left {
+            bottom: 20%;
+            left: 5%;
+        }
+
+        .dancing-dog.right {
+            top: 15%;
+            right: 8%;
+            animation-delay: 1s;
+        }
+
+        @keyframes dogDance {
+            0%, 100% {
+                transform: rotate(-10deg) translateY(0px);
+            }
+            25% {
+                transform: rotate(10deg) translateY(-15px);
+            }
+            50% {
+                transform: rotate(-10deg) translateY(0px);
+            }
+            75% {
+                transform: rotate(10deg) translateY(-10px);
+            }
+        }
+
+        /* NUEVO: Más elementos decorativos flotantes */
+        .floating-element {
+            position: absolute;
+            font-size: 40px;
+            animation: floatSlow 8s infinite ease-in-out;
+            opacity: 0.3;
+            z-index: 1;
+        }
+
+        @keyframes floatSlow {
+            0%, 100% {
+                transform: translateY(0px) translateX(0px) rotate(0deg);
+            }
+            33% {
+                transform: translateY(-30px) translateX(20px) rotate(10deg);
+            }
+            66% {
+                transform: translateY(-15px) translateX(-20px) rotate(-10deg);
+            }
+        }
+
+        /* NUEVO: Estrellas brillantes */
+        .sparkle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            animation: sparkleAnim 2s infinite;
+            z-index: 2;
+        }
+
+        @keyframes sparkleAnim {
+            0%, 100% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.5);
+            }
+        }
+
+        /* NUEVO: Nubes románticas */
+        .cloud {
+            position: absolute;
+            font-size: 50px;
+            animation: cloudMove 20s infinite linear;
+            opacity: 0.2;
+            z-index: 1;
+        }
+
+        @keyframes cloudMove {
+            0% {
+                transform: translateX(-100px);
+            }
+            100% {
+                transform: translateX(calc(100vw + 100px));
+            }
+        }
+
         .container {
             background: rgba(255, 255, 255, 0.95);
             padding: 60px 40px;
@@ -249,14 +344,32 @@
                 opacity: 0;
             }
         }
-.perrito {
-    width: 250px;
-    max-width: 80%;
-    border-radius: 25px;
-    margin-bottom: 25px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-    animation: fadeIn 1.2s ease-in;
-}
+
+        .perrito {
+            width: 250px;
+            max-width: 80%;
+            border-radius: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            animation: fadeIn 1.2s ease-in;
+        }
+
+        /* NUEVO: Animación de celebración para los perritos */
+        .celebrating-dog {
+            animation: dogCelebrate 1s infinite;
+        }
+
+        @keyframes dogCelebrate {
+            0%, 100% {
+                transform: rotate(0deg) scale(1);
+            }
+            25% {
+                transform: rotate(-15deg) scale(1.1);
+            }
+            75% {
+                transform: rotate(15deg) scale(1.1);
+            }
+        }
     </style>
 </head>
 <body>
@@ -273,6 +386,30 @@
     <div class="heart" style="left: 80%; animation-delay: 3.5s;"></div>
     <div class="heart" style="left: 90%; animation-delay: 0.5s;"></div>
 
+    <!-- NUEVO: Perritos bailando en el fondo -->
+    <div class="dancing-dog left">🐕</div>
+    <div class="dancing-dog right">🐶</div>
+
+    <!-- NUEVO: Elementos flotantes adicionales -->
+    <div class="floating-element" style="top: 25%; left: 15%; animation-delay: 0s;">🎵</div>
+    <div class="floating-element" style="top: 60%; right: 12%; animation-delay: 2s;">🎶</div>
+    <div class="floating-element" style="bottom: 35%; left: 8%; animation-delay: 4s;">✨</div>
+    <div class="floating-element" style="top: 40%; right: 20%; animation-delay: 3s;">⭐</div>
+    <div class="floating-element" style="bottom: 25%; right: 15%; animation-delay: 1s;">💫</div>
+
+    <!-- NUEVO: Nubes románticas -->
+    <div class="cloud" style="top: 10%; animation-delay: 0s;">☁️</div>
+    <div class="cloud" style="top: 25%; animation-delay: 10s; animation-duration: 25s;">☁️</div>
+    <div class="cloud" style="bottom: 20%; animation-delay: 5s; animation-duration: 18s;">☁️</div>
+
+    <!-- NUEVO: Estrellas brillantes -->
+    <div class="sparkle" style="top: 15%; left: 25%; animation-delay: 0s;"></div>
+    <div class="sparkle" style="top: 30%; right: 30%; animation-delay: 0.5s;"></div>
+    <div class="sparkle" style="bottom: 40%; left: 35%; animation-delay: 1s;"></div>
+    <div class="sparkle" style="top: 50%; right: 25%; animation-delay: 1.5s;"></div>
+    <div class="sparkle" style="bottom: 25%; right: 40%; animation-delay: 0.8s;"></div>
+    <div class="sparkle" style="top: 70%; left: 20%; animation-delay: 1.2s;"></div>
+
     <!-- Control de música -->
     <div class="music-control" onclick="toggleMusic()" id="musicControl">
         🔇 Música (Click para activar)
@@ -284,9 +421,9 @@
         <source src="musica.mp3" type="audio/mpeg">
     </audio>
 
-<div class="container">
-    <img src="simba.png" class="perrito">
-    <h1>¿Quieres ser mi San Valentín?</h1>
+    <div class="container">
+        <img src="simba.png" class="perrito">
+        <h1>¿Quieres ser mi San Valentín?</h1>
         <div class="message">
             Mi amor, eres de las personas que más amo con todo mi corazón. 
             Cada día a tu lado es un dia lleno de mucho amor y no puedo imaginar este tercer 
@@ -299,46 +436,51 @@
         </div>
     </div>
 
-<script>
-    let yesClicked = false;
-    let musicPlaying = false;
-    const music = document.getElementById('bgMusic');
+    <script>
+        let yesClicked = false;
+        let musicPlaying = false;
+        const music = document.getElementById('bgMusic');
 
-    function activarMusica() {
-        if (music.muted) {
-            music.muted = false;
-            music.volume = 0.6;
-            music.play().then(() => {
-                musicPlaying = true;
-                document.getElementById('musicControl').innerHTML = '🔊 Música';
-            });
+        function activarMusica() {
+            if (music.muted) {
+                music.muted = false;
+                music.volume = 0.6;
+                music.play().then(() => {
+                    musicPlaying = true;
+                    document.getElementById('musicControl').innerHTML = '🔊 Música';
+                });
+            }
         }
-    }
 
-    document.addEventListener('click', activarMusica, { once: true });
-    document.addEventListener('touchstart', activarMusica, { once: true });
+        document.addEventListener('click', activarMusica, { once: true });
+        document.addEventListener('touchstart', activarMusica, { once: true });
 
-    function toggleMusic() {
-        if (musicPlaying) {
-            music.pause();
-            musicPlaying = false;
-            document.getElementById('musicControl').innerHTML = '🔇 Música';
-        } else {
-            music.play().then(() => {
-                musicPlaying = true;
-                document.getElementById('musicControl').innerHTML = '🔊 Música';
-            });
+        function toggleMusic() {
+            if (musicPlaying) {
+                music.pause();
+                musicPlaying = false;
+                document.getElementById('musicControl').innerHTML = '🔇 Música';
+            } else {
+                music.play().then(() => {
+                    musicPlaying = true;
+                    document.getElementById('musicControl').innerHTML = '🔊 Música';
+                });
+            }
         }
-    }
-
 
         function decirSi() {
             yesClicked = true;
+            
+            // NUEVO: Hacer que los perritos del fondo celebren
+            document.querySelectorAll('.dancing-dog').forEach(dog => {
+                dog.classList.add('celebrating-dog');
+            });
+            
             document.querySelector('.container').innerHTML = `
                 <div class="celebration">
                     <div class="emoji">🎉💕✨</div>
                     <h2>¡SÍÍÍÍÍ! 🥰</h2>
-                    <div class="gif-container">💑❤️💝</div>
+                    <div class="gif-container">👩🏻‍❤️‍👨🏻❤️💝</div>
                     <p style="font-size: 1.4em; margin: 20px 0;">¡Sabía que dirías que sí!</p>
                     <p style="font-size: 1.2em; color: #e74c3c;">¡Te amo mucho amorcito! ❤️</p>
                     <p style="font-size: 1.1em; margin-top: 20px;">¡Gracias por dejarme pasar un San Valetin más a tu lado! 🌹</p>
@@ -351,6 +493,9 @@
             
             // Crear confeti
             crearConfeti();
+            
+            // NUEVO: Crear más perritos celebrando
+            crearPerritosCelebrando();
         }
 
         function moverBotonNo(event) {
@@ -395,13 +540,35 @@
             }
         }
 
+        // NUEVO: Función para crear perritos celebrando
+        function crearPerritosCelebrando() {
+            const dogEmojis = ['🐕', '🐶', '🐕‍🦺', '🦮'];
+            
+            for (let i = 0; i < 6; i++) {
+                setTimeout(() => {
+                    const dog = document.createElement('div');
+                    dog.textContent = dogEmojis[Math.floor(Math.random() * dogEmojis.length)];
+                    dog.style.position = 'fixed';
+                    dog.style.fontSize = '50px';
+                    dog.style.left = Math.random() * (window.innerWidth - 50) + 'px';
+                    dog.style.top = '-50px';
+                    dog.style.zIndex = '999';
+                    dog.style.animation = `caer ${3 + Math.random() * 2}s linear`;
+                    
+                    document.body.appendChild(dog);
+                    
+                    setTimeout(() => dog.remove(), 6000);
+                }, i * 200);
+            }
+        }
+
         // Inicializar posición del botón No
         window.addEventListener('load', function() {
             const btnNo = document.getElementById('btnNo');
             btnNo.style.left = '200px';
             btnNo.style.top = '0px';
         });
-
     </script>
 </body>
 </html>
+
