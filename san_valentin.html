@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Quieres ser mi San Valentín? 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Animación de corazones flotantes */
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(45deg);
+            animation: float 6s infinite ease-in-out;
+        }
+
+        .heart:before,
+        .heart:after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+        }
+
+        .heart:before {
+            top: -10px;
+            left: 0;
+        }
+
+        .heart:after {
+            left: 10px;
+            top: 0;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(45deg);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(45deg);
+            }
+        }
+
+        /* Imágenes de fondo románticas */
+        .bg-images {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.1;
+        }
+
+        .bg-images::before {
+            content: "💕 ❤️ 💖 💝 💗 💓 💞 💘";
+            position: absolute;
+            font-size: 100px;
+            top: 10%;
+            left: 5%;
+            animation: pulse 3s infinite;
+        }
+
+        .bg-images::after {
+            content: "🌹 🌺 🌸 💐";
+            position: absolute;
+            font-size: 80px;
+            bottom: 10%;
+            right: 5%;
+            animation: pulse 3s infinite 1.5s;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 60px 40px;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+            z-index: 10;
+            position: relative;
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .emoji {
+            font-size: 100px;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        h1 {
+            color: #e74c3c;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .message {
+            font-size: 1.3em;
+            color: #555;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .buttons-container {
+            position: relative;
+            height: 120px;
+            margin-top: 30px;
+        }
+
+        button {
+            font-size: 1.2em;
+            padding: 15px 40px;
+            margin: 10px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        #btnSi {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        #btnSi:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(245, 87, 108, 0.4);
+        }
+
+        #btnNo {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            color: #555;
+            position: absolute;
+            transition: all 0.2s ease;
+        }
+
+        .celebration {
+            display: none;
+            animation: celebrate 1s ease-in;
+        }
+
+        @keyframes celebrate {
+            0% {
+                transform: scale(0);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .celebration h2 {
+            color: #e74c3c;
+            font-size: 2.5em;
+            margin: 20px 0;
+        }
+
+        .celebration p {
+            font-size: 1.3em;
+            color: #555;
+            margin: 10px 0;
+        }
+
+        .gif-container {
+            margin: 20px 0;
+            font-size: 80px;
+        }
+
+        /* Control de música */
+        .music-control {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px 15px;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            font-size: 1.2em;
+            z-index: 100;
+        }
+
+        .music-control:hover {
+            background: white;
+        }
+
+        @keyframes caer {
+            to {
+                transform: translateY(110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+.perrito {
+    width: 250px;
+    max-width: 80%;
+    border-radius: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    animation: fadeIn 1.2s ease-in;
+}
+    </style>
+</head>
+<body>
+    <div class="bg-images"></div>
+    
+    <!-- Corazones flotantes -->
+    <div class="heart" style="left: 10%; animation-delay: 0s;"></div>
+    <div class="heart" style="left: 20%; animation-delay: 1s;"></div>
+    <div class="heart" style="left: 30%; animation-delay: 2s;"></div>
+    <div class="heart" style="left: 40%; animation-delay: 3s;"></div>
+    <div class="heart" style="left: 50%; animation-delay: 4s;"></div>
+    <div class="heart" style="left: 60%; animation-delay: 1.5s;"></div>
+    <div class="heart" style="left: 70%; animation-delay: 2.5s;"></div>
+    <div class="heart" style="left: 80%; animation-delay: 3.5s;"></div>
+    <div class="heart" style="left: 90%; animation-delay: 0.5s;"></div>
+
+    <!-- Control de música -->
+    <div class="music-control" onclick="toggleMusic()" id="musicControl">
+        🔇 Música (Click para activar)
+    </div>
+
+    <!-- Audio de fondo -->
+    <audio id="bgMusic" loop autoplay muted>
+        <!-- Nota: Aquí podrías agregar una URL de música romántica -->
+        <source src="musica.mp3" type="audio/mpeg">
+    </audio>
+
+<div class="container">
+    <img src="simba.png" class="perrito">
+    <h1>¿Quieres ser mi San Valentín?</h1>
+        <div class="message">
+            Mi amor, eres de las personas que más amo con todo mi corazón. 
+            Cada día a tu lado es un dia lleno de mucho amor y no puedo imaginar este tercer 
+            San Valentín sin ti. ¿Me harías el honor de ser mi San Valentín? 💕
+        </div>
+        
+        <div class="buttons-container">
+            <button id="btnSi" onclick="decirSi()">¡SÍ! 💖</button>
+            <button id="btnNo" onmouseover="moverBotonNo(event)" onclick="moverBotonNo(event)">No</button>
+        </div>
+    </div>
+
+<script>
+    let yesClicked = false;
+    let musicPlaying = false;
+    const music = document.getElementById('bgMusic');
+
+    function activarMusica() {
+        if (music.muted) {
+            music.muted = false;
+            music.volume = 0.6;
+            music.play().then(() => {
+                musicPlaying = true;
+                document.getElementById('musicControl').innerHTML = '🔊 Música';
+            });
+        }
+    }
+
+    document.addEventListener('click', activarMusica, { once: true });
+    document.addEventListener('touchstart', activarMusica, { once: true });
+
+    function toggleMusic() {
+        if (musicPlaying) {
+            music.pause();
+            musicPlaying = false;
+            document.getElementById('musicControl').innerHTML = '🔇 Música';
+        } else {
+            music.play().then(() => {
+                musicPlaying = true;
+                document.getElementById('musicControl').innerHTML = '🔊 Música';
+            });
+        }
+    }
+
+
+        function decirSi() {
+            yesClicked = true;
+            document.querySelector('.container').innerHTML = `
+                <div class="celebration">
+                    <div class="emoji">🎉💕✨</div>
+                    <h2>¡SÍÍÍÍÍ! 🥰</h2>
+                    <div class="gif-container">💑❤️💝</div>
+                    <p style="font-size: 1.4em; margin: 20px 0;">¡Sabía que dirías que sí!</p>
+                    <p style="font-size: 1.2em; color: #e74c3c;">¡Te amo mucho amorcito! ❤️</p>
+                    <p style="font-size: 1.1em; margin-top: 20px;">¡Gracias por dejarme pasar un San Valetin más a tu lado! 🌹</p>
+                    <div style="margin-top: 30px; font-size: 3em;">
+                        💐🎈🎊💖🌺
+                    </div>
+                </div>
+            `;
+            document.querySelector('.celebration').style.display = 'block';
+            
+            // Crear confeti
+            crearConfeti();
+        }
+
+        function moverBotonNo(event) {
+            if (yesClicked) return;
+            
+            event.preventDefault();
+            const boton = event.target;
+            const container = document.querySelector('.buttons-container');
+            const containerRect = container.getBoundingClientRect();
+            
+            // Generar posición aleatoria
+            const maxX = containerRect.width - boton.offsetWidth - 20;
+            const maxY = containerRect.height - boton.offsetHeight - 20;
+            
+            const randomX = Math.max(0, Math.random() * maxX);
+            const randomY = Math.max(0, Math.random() * maxY);
+            
+            boton.style.left = randomX + 'px';
+            boton.style.top = randomY + 'px';
+        }
+
+        function crearConfeti() {
+            const colors = ['#ff6b6b', '#ffd93d', '#6bcf7f', '#a29bfe', '#fd79a8'];
+            
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confeti = document.createElement('div');
+                    confeti.style.position = 'fixed';
+                    confeti.style.width = '10px';
+                    confeti.style.height = '10px';
+                    confeti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confeti.style.left = Math.random() * window.innerWidth + 'px';
+                    confeti.style.top = '-10px';
+                    confeti.style.borderRadius = '50%';
+                    confeti.style.zIndex = '1000';
+                    confeti.style.animation = `caer ${2 + Math.random() * 3}s linear`;
+                    
+                    document.body.appendChild(confeti);
+                    
+                    setTimeout(() => confeti.remove(), 5000);
+                }, i * 30);
+            }
+        }
+
+        // Inicializar posición del botón No
+        window.addEventListener('load', function() {
+            const btnNo = document.getElementById('btnNo');
+            btnNo.style.left = '200px';
+            btnNo.style.top = '0px';
+        });
+
+    </script>
+</body>
+</html>
